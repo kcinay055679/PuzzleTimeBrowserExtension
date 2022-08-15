@@ -1,7 +1,7 @@
 <div *ngIf="this.data?.length !=0">
   <div class="w-100 d-flex flex-column justify-content-end">
-    <div class="d-flex flex-row">
-      <mat-form-field class="" appearance="outline">
+    <div class="d-flex flex-row h-25">
+      <mat-form-field appearance="outline" class="my-0">
         <mat-label>GitHub repo</mat-label>
         <input matInput type="text" #element>
         <button *ngIf="element.value" matSuffix mat-icon-button aria-label="Clear" (click)="element.value = ''">
