@@ -1,12 +1,47 @@
 <div *ngIf="this.data?.length !=0">
-  <div class="w-100 d-flex justify-content-end">
-    <button class="mx-2" mat-stroked-button color="primary" [disabled]="!isPresetSelected()" (click)="submit()">Eintrag abschliessen</button>
+  <div class="w-100 d-flex flex-column justify-content-end">
+    <div class="d-flex flex-row">
+      <mat-form-field class="" appearance="outline">
+        <mat-label>GitHub repo</mat-label>
+        <input matInput type="text" #element>
+        <button *ngIf="element.value" matSuffix mat-icon-button aria-label="Clear" (click)="element.value = ''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button mat-stroked-button (click)="addHost(element.value)">Host hinzufügen</button>
+    </div>
+
+
+    <div class="d-flex flex-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Repos</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let host of hostList" [value]="host">{{host}}</mat-option>
+          <mat-option [value]="'test'">Placeholder</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="" appearance="outline">
+        <mat-label>Ticket nr.</mat-label>
+        <input matInput type="text" #ticketNr>
+        <button *ngIf="ticketNr.value" matSuffix mat-icon-button aria-label="Clear" (click)="ticketNr.value = ''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <button class="mx-2" mat-stroked-button color="primary" [disabled]="!isPresetSelected()" (click)="submit()">
+        Eintrag abschliessen
+      </button>
+    </div>
+
   </div>
 
-  <table [dataSource]="dataSource" class="mat-elevation-z8 w-100" mat-table multiTemplateDataRows matSort>
 
+  <table [dataSource]="dataSource" class="mat-elevation-z8 w-100" mat-table multiTemplateDataRows matSort>
     <ng-container matColumnDef="puzzleAccount.name">
-      <th *matHeaderCellDef mat-header-cell mat-sort-header="puzzleAccount.name" sortActionDescription="Sort by account">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header="puzzleAccount.name"
+          sortActionDescription="Sort by account">
         <mat-icon>apartment</mat-icon>
       </th>
       <td *matCellDef="let element" mat-cell>
@@ -54,7 +89,8 @@
     <ng-container matColumnDef="expand">
       <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button  (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+        <button mat-icon-button
+                (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
           <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
           <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
         </button>

@@ -40,6 +40,8 @@ export class AppComponent {
     "delete"
   ];
 
+  hostList:string[] = [];
+
   constructor(private _ordertimeService: OrdertimesService,
               private _notifierService: NotifierService
   ) {
@@ -134,5 +136,12 @@ export class AppComponent {
     }else{
       this._notifierService.openSnackBar("Du must mindestens für eine Minute arbeiten bevor du das Ticket speichern kannst", "ok")
     }
+  }
+
+  addHost(value: string) {
+    let parts = new URL(value).pathname.split("/");
+    let repo = parts[1];
+    let owner = parts[2];
+    this.hostList.push(`https://api.github.com/repos/${owner}/${repo}/issues`);
   }
 }
