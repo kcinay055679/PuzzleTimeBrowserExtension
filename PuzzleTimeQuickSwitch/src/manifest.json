@@ -13,7 +13,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://pitc-puzzletime-int.ocp.cloudscale.puzzle.ch/ordertimes/*"
+        "https://time.puzzle.ch/ordertimes/*"
       ],
       "js": [
         "background.js"

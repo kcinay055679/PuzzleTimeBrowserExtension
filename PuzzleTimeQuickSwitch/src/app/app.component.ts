@@ -65,7 +65,7 @@ export class AppComponent {
   }
 
   delete(element: TimePresetModel) {
-    if(element == this.data[0]){
+    if(element == this.data[0] && this.isPresetSelected()){
       this._notifierService.openSnackBar("Sie können das Ticket welches sie ausgewählt haben nicht löschen", "ok")
       return;
     }
